@@ -1,6 +1,6 @@
 # Alina's Django Portfolio
 
-This is my Python Django Portolio. 
+This is my Python Django Portolio. You can check my stacks and my work here!
 The portfolio contain:
 Home
 About
