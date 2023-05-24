@@ -1,36 +1,20 @@
-# SimpleDjangoPortfolio
+# Alina's Django Portfolio
 
-This is a Simple Python Django Portolio.The portfolio is easy  just use "/admin"  to login into Django admin panel to change you personal info.
+This is my Python Django Portolio. You can check my stacks and my work here!
+The portfolio contain:
+Home
+About
+Skills
+My Work
+Contact
+Contrast (You have 2 ways of using it: darker theme or lighter theme)
+
+Stacke used: Python / Django / jQuery / Bootstrap / Css / JavaScript / HTML
+
+
+
 
 <h3> 
      
      
-<div> <img src="https://github.com/tech-jamara/SimpleDjangoPortfolio/blob/main/mode.png?raw=true"  />
-
-
-## Run these Commads
-### Step 1
-     pip install -r requirements.txt
-### Step 2
-     python manage.py migrate
-     
-### Step 4
-     python manage.py createsuperuser
-        
-### Step 3
-     python manage.py runserver
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
+<div> <img src="https://github.com/sempedia/portfolio/blob/main/mode.png?raw=true"  />
