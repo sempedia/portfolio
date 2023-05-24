@@ -1,4 +1,4 @@
-from .variables import *
+
 import dj_database_url
 import os
 from pathlib import Path
@@ -17,8 +17,7 @@ SECRET_KEY = 'django-insecure-9o^!5shqqavj@#@&36+y+nl3csjw2%hr3(wrzh@be05fd5ita)
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'jameswaweru.herokuapp.com',
-    'jameswaweruweb.herokuapp.com',
+    'alina-bazavan-portfolio.herokuapp.com',
     '127.0.0.1'
 ]
 
