@@ -1,19 +1,19 @@
 from django.shortcuts import render
-from .models import *
+from .models import PersonalInformation, About, Project, Skill
 
 # Create your views here.
 
 
-def home_page(request):
-    myinfo = PersonalInformation.objects.all()
-    myabout = About.objects.all()
-    myskills = Projects.objects.all()
-    skills = Skills.objects.all()
+def home(request):
+    personal_info = PersonalInformation.objects.all()
+    about = About.objects.all()
+    projects = Project.objects.all()
+    skills = Skill.objects.all()
     context = {
-        "info": myinfo,
-        "about": myabout,
-        "skills": myskills,
-        "know": skills
+        'personal_info': personal_info,
+        'about': about,
+        'projects': projects,
+        'skills': skills
     }
 
-    return render(request, 'home_page.html', context)
+    return render(request, 'home.html', context)
