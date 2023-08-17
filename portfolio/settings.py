@@ -1,6 +1,13 @@
 from pathlib import Path
 import dj_database_url
 
+# for creation of environment variables into .env file on root folder.
+import environ
+
+env = environ.Env()
+
+environ.Env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,16 +17,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9o^!5shqqavj@#@&36+y+nl3csjw2%hr3(wrzh@be05fd5ita)'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = [
-    'alina-bazavan-portfolio.herokuapp.com',
-    '127.0.0.1',
-    '.vercel.app'
-]
+ALLOWED_HOSTS = ['*']
+#     ['alina-bazavan-portfolio.herokuapp.com',
+#     '127.0.0.1',
+#     '.vercel.app'
+# ]
 
 # Application definition
 
@@ -67,18 +74,36 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# Deploying to render.com with postgres database:
+# make use of dj-database-url package to bring in our External Database URL from render.com
+import dj_database_url
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(env('DATABASE_URL'))
 }
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+
+
+
+
+# DATABASES['default'] = dj_database_url.config(
+#     conn_max_age=600,
+#     conn_health_checks=True,
+# )
+# Database
+# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# deploying with POSTGRESQL on railway.app is easy
+ #We
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         # 'NAME': BASE_DIR / 'db.sqlite3',
+# 'USER': '', # take all those informations from railway.app from POSTGRESql or from render.com 
+# 'PORT':'',
+# 'HOST':'',
+#     }
+# }
+# db_from_env = dj_database_url.config(conn_max_age=600)
+# DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
