@@ -4,6 +4,7 @@ import dj_database_url
 # for creation of environment variables into .env file on root folder.
 import environ
 
+
 env = environ.Env()
 
 environ.Env.read_env()
@@ -72,32 +73,25 @@ TEMPLATES = [
     },
 ]
 
+# gunicorn will be the intermediate server between django and render
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 # Deploying to render.com with postgres database:
 # make use of dj-database-url package to bring in our External Database URL from render.com
-import dj_database_url
 
 DATABASES = {
     'default': dj_database_url.parse(env('DATABASE_URL'))
 }
 
 
-
-
-# DATABASES['default'] = dj_database_url.config(
-#     conn_max_age=600,
-#     conn_health_checks=True,
-# )
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-# deploying with POSTGRESQL on railway.app is easy
- #We
+
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         # 'NAME': BASE_DIR / 'db.sqlite3',
-# 'USER': '', # take all those informations from railway.app from POSTGRESql or from render.com 
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+# 'USER': '', 
 # 'PORT':'',
 # 'HOST':'',
 #     }
