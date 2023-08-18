@@ -152,3 +152,4 @@ MEDIA_ROOT = BASE_DIR / 'portfolio_app/static/images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
+CSRF_COOKIE_SECURE = True
