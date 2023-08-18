@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>A L I N A &nbsp; B A Z A V A N</title>
     <link rel="icon" href="{% static 'images/logo-icon.png' %}">
-    <link rel="icon" href="/Assets/img/15.jpg">
+    {% comment %} <link rel="icon" href="/Assets/img/15.jpg"> {% endcomment %}
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
@@ -20,8 +20,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="preload" href="{% static 'images/fonts/Agustina.21f233e1.woff' %}" as="font" type="font/woff" crossorigin="">
+    
+   
     <script src="https://use.fontawesome.com/66c3c19309.js"></script>
-    <script src="https://unpkg.com/ionicons@5.5.3/dist/ionicons.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.3/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule="" src="https://unpkg.com/ionicons@5.5.3/dist/ionicons/ionicons.js"></script>
     <!-- links -->
 </head>
 
@@ -240,6 +243,8 @@
                         {% for project in projects %}
                         <div class="card initial-6 w- aos-init" data-aos="zoom-in" data-aos-delay="500">
                             <img src="{{ project.image.url }}" alt="Project Image">
+                            <p>{{ project.image.url }}</p> <!-- Add this line to print the URL -->
+
                             <div class="card-body col-5-info px-3 py-3">
                                 <h3 class="pb-1">{{ project.title }}</h3>
                                 <p class="pb-1">{{ project.skill }}</p>

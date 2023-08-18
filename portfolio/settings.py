@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 #     ['alina-bazavan-portfolio.herokuapp.com',
@@ -41,11 +41,13 @@ INSTALLED_APPS = [
 
     'feeds.apps.FeedsConfig',
     'ckeditor',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -143,9 +145,10 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 #Media files for user uploaded files:
 
 MEDIA_URL = '/images/'
-MEDIA_ROOT = BASE_DIR / 'static/images'
+MEDIA_ROOT = BASE_DIR / 'portfolio_app/static/images'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CORS_ALLOW_ALL_ORIGINS = True

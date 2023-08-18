@@ -8,7 +8,7 @@ from django.utils.html import format_html
 
 class PersonalInformation(models.Model):
     name_complete = models.CharField(max_length=50, blank=True, null=True)
-    avatar = models.ImageField(null=True, default='15')
+    avatar = models.ImageField(null=True, default='home.png')
     mini_about = models.TextField(blank=True, null=True)
     address = models.CharField(max_length=100, blank=True, null=True)
     phone = models.CharField(max_length=20, blank=True, null=True)
