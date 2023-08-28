@@ -7,13 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>A L I N A &nbsp; B A Z A V A N</title>
+    <meta name="description" content="This is my portfolio. You can view here few samples of my work.">
+    <meta name="keywords" content="portfolio, cv, alina, bazavan, django, python, django developer, python developer, html, JavaScript, aol, bootstrap, work, projects, about, contact, github, linkedin, twitter, facebook">
     <link rel="icon" href="{% static 'images/logo-icon.png' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Poppins&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css">
+    {% comment %} <link rel="stylesheet" href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css"> {% endcomment %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" >
     <!-- links -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -80,7 +82,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 initial-1 aos-init" data-aos="zoom-in" data-aos-delay="300">
-                        <img src="{% static 'images/home.png' %}" alt="Avatar">
+                        <img src="{% static 'images/home.png' %}" alt="Avatar" height="" width="">
                     </div>
                     {% endfor %}
                 </div>
@@ -97,7 +99,7 @@
                 <div class="row2 initial-3">
                     {% for aboutme in about %}
                     <div class="col-md-6 aos-init" data-aos="fade-up-right" data-aos-delay="700">
-                        <img src="{% static 'images/avatar/about_me.png' %}" alt="About me">
+                        <img src="{% static 'images/about.png' %}" alt="About me" height="" width="">
                     </div>
                     <div class="col-md-6 initial-4">
                         <div class="title aos-init" data-aos="zoom-in" data-aos-delay="200">
@@ -123,10 +125,7 @@
                                 <ion-icon name="logo-javascript" style="color: yellow;font-size:35px"></ion-icon>
                                 <p>Javascript</p>
                             </div>
-                            {% comment %} <div class="django-icon">
-                                <img src="{% static 'images/django_icon.png' %}" alt="Django Icon" style="width: 35px; height: 35px;">
-                                <p>Django</p>
-                            </div> {% endcomment %}
+                           
 
                             <div> <i class="fa fa-database"></i>
                                 <p>SQL Database</p>
@@ -149,7 +148,7 @@
                     <div class="row9">
                         <div class="col-md-10 initial-5">
                             <div class="title">
-                                <h1 class="">SKILLS</h1>
+                                <h1>SKILLS</h1>
                             </div>
                             <div class="all-bars">
 
@@ -221,38 +220,38 @@
                     </div>
                 </div>
             </div>
+        </div>
         </article>
     </section>
 
 
-<!--Work Section-->
+<!-- Work Section -->
 <br>
 <br>
 <br>
-    <div class="work">
-        <div class="container" id="work">
-            <div class="title2">
-                <h1>MY WORK</h1>
-            </div>
-            <div class="small-container">
+<div class="work">
+    <div class="container" id="work">
+        <div class="title2">
+            <h1>MY WORK</h1>
+        </div>
+        <div class="small-container">
+            <div class="row3">
                 <div class="row3">
-                    <div class="row3">
-                        {% for project in projects %}
-                        <div class="card initial-6 w- aos-init" data-aos="zoom-in" data-aos-delay="500">
-                            <img src="{{ project.image.url }}" alt="Project Image">
-                            <div class="card-body col-5-info px-3 py-3">
-                                <h3 class="pb-1">{{ project.title }}</h3>
-                                <p class="pb-1">{{ project.skill }}</p>
-                                <button><a href="{{ project.link }}">VISIT</a></button>
-                            </div>
+                    {% for project in projects %}
+                    <div class="card initial-6 w- aos-init" data-aos="zoom-in" data-aos-delay="500">
+                        <img src="{{ project.image.url }}" alt="Project Image" height="" width="">
+                        <div class="card-body col-5-info px-3 py-3">
+                            <h3 class="pb-1">{{ project.title }}</h3>
+                            <p class="pb-1">{{ project.skill }}</p>
+                            <button><a href="{{ project.link }}">VISIT</a></button>
                         </div>
-                        {% endfor %}
                     </div>
-    
+                    {% endfor %}
+                </div>
             </div>
         </div>
     </div>
-
+</div>
 
 <!--Contact Section-->
     <footer id="contact">
@@ -262,10 +261,10 @@
             </div>
             <div class="small-container">
                 <div class="row4">
-                                         {% for info in personal_info %}
+                {% for info in personal_info %}
 
                     <div class="col-md-6 initial-8 aos-init" data-aos="fade-down-right" data-aos-delay="300">
-                        <p id="helo">Wanna talk about a project or just saying: Hi! <img src="{%  static 'images/hand.png' %}" alt="" id="e" class="wave"></p>
+                        <p id="helo">Wanna talk about a project or just saying: Hi!<img src="{% static 'images/hand.png' %}" alt="" id="e" class="wave" height="" width=""></p>
 
                         <div class="contact-info">
                             <div class="c-ico">
@@ -273,7 +272,7 @@
 
                             </div>
                             <p>Email: <span>{{ info.email }}</span></p>
-                            <p>Phone: <span>{{  info.phone }}</span></p>
+                            <p>Phone: <span>{{ info.phone }}</span></p>
                         </div>
                         <div class="contact-info">
                             <div class="c-ico">
@@ -296,10 +295,11 @@
                     </div>
 
                     <div class=" col-md-6 initial-7 aos-init " data-aos="zoom-in " data-aos-delay="700 ">
-                        <img src="{% static 'images/contact_me.svg' %} " alt="Contact Me">
+                        <img src="{% static 'images/contact_me.svg' %} " alt="Contact Me" height="" width="">
                     </div>
                  {% endfor %}
                 </div>
+            </div>
                 <div class="footing ">
                     <div class="row justify-content-center ">
                         <div class="col-md-4 ">
@@ -307,8 +307,9 @@
                             <p>Alina Bazavan</p>
                             <p>A Python/Django Developer</p>
                             <p id="copy" style="display: inline;">© COPYRIGHTS &nbsp; A L I N A &nbsp; B A Z A V A N. &nbsp; ALL RIGHTS RESERVED.</p>
-                    </div>
-                    </p>
+                        
+                        </div>
+                    
                 </div>
             </div>
         </div>
