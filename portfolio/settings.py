@@ -24,7 +24,24 @@ SECRET_KEY = env('SECRET_KEY')
 DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'portfolio-app-t0qn-onrender.com']
-
+LOGGING = {
+   'version': 1,
+   'disable_existing_loggers': False,
+   'handlers': {
+      'file': {
+         'level': 'DEBUG',
+         'class': 'logging.FileHandler',
+         'filename': 'feeds/debug.log',
+      },
+   },
+   'loggers': {
+      'django': {
+         'handlers': ['file'],
+         'level': 'DEBUG',
+         'propagate': True,
+      },
+   },
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -78,7 +95,7 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 # make use of dj-database-url package to bring in our External Database URL from render.com
 
 DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
+    'default': dj_database_url.parse(env('DATABASE_URL')),
 }
 
 
