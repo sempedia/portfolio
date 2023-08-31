@@ -23,7 +23,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'portfolio-app-t0qn-onrender.com']
+ALLOWED_HOSTS = ['portfolio-app-t0qn-onrender.com']
 LOGGING = {
    'version': 1,
    'disable_existing_loggers': False,
