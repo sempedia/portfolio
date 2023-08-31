@@ -1,9 +1,10 @@
 from pathlib import Path
+import os
 import dj_database_url
 
 # for creation of environment variables into .env file on root folder.
 import environ
-import os
+
 
 env = environ.Env()
 
@@ -23,7 +24,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['portfolio-app-t0qn-onrender.com']
+ALLOWED_HOSTS = ['.127.0.0.1', '.localhost', '.portfolio-app-t0qn.onrender.com']
 LOGGING = {
    'version': 1,
    'disable_existing_loggers': False,
