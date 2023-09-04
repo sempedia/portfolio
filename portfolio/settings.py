@@ -152,9 +152,9 @@ CSRF_COOKIE_SECURE = True
 
 # Cloudinary - Django Integration
 cloudinary.config(
-cloud_name = env("CLOUD_NAME"),
-api_key = env("API_CLOUD_KEY"),
-api_secret = env("API_CLOUD_SECRET")
+CLOUD_NAME = env("CLOUD_NAME"),
+API_CLOUD_KEY = env("API_CLOUD_KEY"),
+API_CLOUD_SECRET = env("API_CLOUD_SECRET")
 )
 
 
