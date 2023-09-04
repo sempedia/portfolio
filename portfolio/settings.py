@@ -131,8 +131,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
+# STATICFILES_STORAGE can be from whitenoise, or django built-in or cloud storage...
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+# STATICFILES_STORAGE = 'myproject.storage.S3Storage'
 
 #Media files for user uploaded files:
 MEDIA_URL = '/media/'
@@ -149,6 +150,27 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_COOKIE_SECURE = True
 
+# Other deployment checks:
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_NAME = 'sessionid'
+SESSION_SAVE_EVERY_REQUEST = False
+SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+SESSION_COOKIE_PATH = '/'
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SECURE = True
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+SESSION_COOKIE_AGE = 1209600
+# SESSION_COOKIE_DOMAIN = None
+SESSION_CACHE_ALIAS = 'default'
+
+# Users can access the app over both HTTP and HTTPS.
+SECURE_HSTS_SECONDS = 86400
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
+
+
 
 # Cloudinary - Django Integration
 cloudinary.config(
@@ -163,11 +185,6 @@ API_CLOUD_SECRET = env("API_CLOUD_SECRET")
 if env('ENVIRONMENT') == 'PRODUCTION':
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-
-# cloudinary.utils.cloudinary_url("sample.jpg", width=100, height=150, crop="fill")
-
-# cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg", 
-#   public_id = "olympic_flag")
 
 
 
