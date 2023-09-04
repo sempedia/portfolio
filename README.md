@@ -1,1 +1,1 @@
-This is my Portfolio. You can check my work and my stacks here.
+This is my Portfolio website. You can check few samples of my work here and the stacks used for building them.

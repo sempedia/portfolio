@@ -1,48 +1,39 @@
 from pathlib import Path
-import os
+
+# database library import
 import dj_database_url
 
-# for creation of environment variables into .env file on root folder.
+# environ imports for creation of environment variables into .env file on root folder.
 import environ
+import os
 
+# Cloudinary imports
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
+# Create environment variables into .env file on root folder
 env = environ.Env()
 
+# read environment variables from .env file
 environ.Env.read_env()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# Reference to SECRET_KEY environment variable from .env file.
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.127.0.0.1', '.localhost', '.portfolio-app-t0qn.onrender.com']
-LOGGING = {
-   'version': 1,
-   'disable_existing_loggers': False,
-   'handlers': {
-      'file': {
-         'level': 'DEBUG',
-         'class': 'logging.FileHandler',
-         'filename': 'feeds/debug.log',
-      },
-   },
-   'loggers': {
-      'django': {
-         'handlers': ['file'],
-         'level': 'DEBUG',
-         'propagate': True,
-      },
-   },
-}
+ALLOWED_HOSTS = ['*']
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -51,11 +42,15 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    
 
     'feeds.apps.FeedsConfig',
     'ckeditor',
     'corsheaders',
+    
+    'cloudinary_storage',
+    'django.contrib.staticfiles',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -92,14 +87,12 @@ TEMPLATES = [
 # gunicorn will be the intermediate server between django and render
 WSGI_APPLICATION = 'portfolio.wsgi.application'
 
+
 # Deploying to render.com with postgres database:
 # make use of dj-database-url package to bring in our External Database URL from render.com
-
 DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL')),
+    'default': dj_database_url.parse(env('DATABASE_URL'))
 }
-
-
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -135,8 +128,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-
-
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
@@ -144,9 +135,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 #Media files for user uploaded files:
-
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR / 'media/')
+MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 
 
 
@@ -154,5 +144,36 @@ MEDIA_ROOT = os.path.join(BASE_DIR / 'media/')
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# CORS and CSRF configuration
 CORS_ALLOW_ALL_ORIGINS = True
 CSRF_COOKIE_SECURE = True
+
+
+# Cloudinary - Django Integration
+cloudinary.config(
+cloud_name = env("CLOUD_NAME"),
+api_key = env("API_CLOUD_KEY"),
+api_secret = env("API_CLOUD_SECRET")
+)
+
+
+# DEFAULT_FILE_STORAGE configuration for production DEBUG=False or
+# from .env file ENVIRONMENT=PRODUCTION
+if env('ENVIRONMENT') == 'PRODUCTION':
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
+# cloudinary.utils.cloudinary_url("sample.jpg", width=100, height=150, crop="fill")
+
+# cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg", 
+#   public_id = "olympic_flag")
+
+
+
+# Email settings
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_HOST_USER = '---'
+# EMAIL_HOST_PASSWORD = '---'
+# EMAIL_USE_TLS = True
