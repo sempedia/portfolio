@@ -2,7 +2,7 @@ from django.shortcuts import render
 from .models import PersonalInformation, About, Project, Skill
 from django import forms
 
-from cloudinary.forms import cl_init_js_callbacks     
+from cloudinary.forms import cl_init_js_callbacks    
 from .models import Project
 from .forms import ProjectForm
 

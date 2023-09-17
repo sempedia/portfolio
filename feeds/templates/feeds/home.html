@@ -1,4 +1,6 @@
 {% load static %}
+{% load cloudinary %}
+
 <!DOCTYPE html>
 <html lang="en">
 <!--Header-->
@@ -82,7 +84,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 initial-1 aos-init" data-aos="zoom-in" data-aos-delay="300">
-                        <img src="{% static 'images/home.png' %}" alt="Avatar" height="" width="">
+                        <img src="{{ 'cloudinary personal_info.image.url' }}" alt="Avatar" height="" width="">
                     </div>
                     {% endfor %}
                 </div>
@@ -99,7 +101,7 @@
                 <div class="row2 initial-3">
                     {% for about_me in about %}
                     <div class="col-md-6 aos-init" data-aos="fade-up-right" data-aos-delay="700">
-                        <img src="{% static 'images/home.png' %}" alt="About me" height="" width="">
+                        <img src="{{ 'cloudinary about.image.url' }}" alt="About me" height="" width="">
                     </div>
                     <div class="col-md-6 initial-4">
                         <div class="title aos-init" data-aos="zoom-in" data-aos-delay="200">
@@ -237,7 +239,23 @@
                 <div class="row3">
                     {% for project in projects %}
                     <div class="card initial-6 w- aos-init" data-aos="zoom-in" data-aos-delay="500">
-                        <img src="{{ project.image.url }}" alt="Project Image" height="" width="">
+                        {% comment %} <img src="{{ project.image.url }}" alt="Project Image" height="" width=""> {% endcomment %}
+
+                        <!-- Cloudinary form for uploading the images -->
+                        {% comment %} <div id='backend_upload'>
+                            <form action="" method="post" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                {{ backend_form }}
+                                <input type="submit" value="Upload">
+                            </form>
+                        </div>  {% endcomment %}
+
+                        <!-- Embed the image using Cloudinary URL -->
+                        {% if project.image %}
+                            <img src="{{ 'cloudinary project.image.url' }}" alt="Project Image">
+                        {% endif %}
+
+                          
                         <div class="card-body col-5-info px-3 py-3">
                             <h3 class="pb-1">{{ project.title }}</h3>
                             <p class="pb-1">{{ project.skill }}</p>

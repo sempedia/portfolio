@@ -32,7 +32,7 @@ SECRET_KEY = env('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['portfolio-app-t0qn.onrender.com']
 
 # Application definition
 
@@ -136,7 +136,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # STATICFILES_STORAGE = 'myproject.storage.S3Storage'
 
 #Media files for user uploaded files:
-MEDIA_URL = '/media/'
+MEDIA_URL = 'https://portfolio-app-t0qn.onrender.com/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
 
 
@@ -148,28 +148,38 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # CORS and CSRF configuration
 CORS_ALLOW_ALL_ORIGINS = True
-CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = False # 
 
 # Other deployment checks:
 
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'
-SESSION_COOKIE_NAME = 'sessionid'
-SESSION_SAVE_EVERY_REQUEST = False
-SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
-SESSION_COOKIE_PATH = '/'
-SESSION_COOKIE_SAMESITE = 'Lax'
-SESSION_COOKIE_SECURE = True
-SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-SESSION_COOKIE_AGE = 1209600
+# SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+# SESSION_COOKIE_NAME = 'sessionid'
+# SESSION_SAVE_EVERY_REQUEST = False
+# SESSION_SERIALIZER = 'django.contrib.sessions.serializers.JSONSerializer'
+# SESSION_COOKIE_PATH = '/'
+# SESSION_COOKIE_SAMESITE = 'Lax'
+# SESSION_COOKIE_SECURE = False # 
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+# SESSION_COOKIE_AGE = 1209600
 # SESSION_COOKIE_DOMAIN = None
-SESSION_CACHE_ALIAS = 'default'
+# SESSION_CACHE_ALIAS = 'default'
 
-# Users can access the app over both HTTP and HTTPS.
-SECURE_HSTS_SECONDS = 86400
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-SECURE_HSTS_PRELOAD = True
 
+# # Users can access the app over both HTTP and HTTPS.
+# SECURE_HSTS_SECONDS = 0
+# SECURE_SSL_REDIRECT = False #
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_HSTS_PRELOAD = True
+
+
+# settings.py
+CLOUD_NAME = env('CLOUD_NAME')
+API_CLOUD_KEY = env('API_CLOUD_KEY')
+API_CLOUD_SECRET = env('API_CLOUD_SECRET')
+
+# print(f"CLOUD_NAME: {CLOUD_NAME}")
+# print(f"API_CLOUD_KEY: {API_CLOUD_KEY}")
+# print(f"API_CLOUD_SECRET: {API_CLOUD_SECRET}")
 
 
 # Cloudinary - Django Integration
