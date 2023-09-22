@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # print(f"ENVIRONMENT: {ENVIRONMENT}")
 # print(f"DEBUG: {DEBUG}")
@@ -137,7 +137,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-
+STATIC_URL = '/static/'
     
 if DEBUG:
     # Development settings
@@ -145,7 +145,6 @@ if DEBUG:
     DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
     
     # Static files configuration
-    STATIC_URL = '/static/'
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -153,15 +152,22 @@ if DEBUG:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 else:
-    print(cloudinary.config().cloud_name)
-    print(cloudinary.config().api_key)
-    print(cloudinary.config().api_secret)
     # Production settings
+    # Configure Cloudinary using environment variables
+    CLOUDINARY_URL = env('CLOUDINARY_URL').split('@')
+    cloudinary.config(
+        cloud_name=CLOUDINARY_URL[0].split(':')[0],
+        api_key=CLOUDINARY_URL[0].split(':')[1],
+        api_secret=CLOUDINARY_URL[1]
+    )
+
     # Set Cloudinary as the default file storage for media files
     DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-    # Configure Cloudinary using environment variables
-    CLOUDINARY_URL = env('CLOUDINARY_URL')
+    
+    # print(cloudinary.config().cloud_name)
+    # print(cloudinary.config().api_key)
+    # print(cloudinary.config().api_secret)
+    
 
 
 # Default primary key field type
