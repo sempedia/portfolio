@@ -30,9 +30,18 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['portfolio-app-t0qn.onrender.com']
+# print(f"ENVIRONMENT: {ENVIRONMENT}")
+# print(f"DEBUG: {DEBUG}")
+
+# DEVELOPMENT host:
+if DEBUG:
+    ALLOWED_HOSTS = ['127.0.0.1']
+# PRODUCTION host:
+else:
+    ALLOWED_HOSTS = ['portfolio-app-t0qn.onrender.com', 'www.portfolio-app-t0qn.onrender.com']
+
 
 # Application definition
 
@@ -125,20 +134,34 @@ USE_L10N = True
 USE_TZ = True
 
 
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+    
+if DEBUG:
+    # Development settings
+    # Use the default Django file storage for media files
+    DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+    
+    # Static files configuration
+    STATIC_URL = '/static/'
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# STATICFILES_STORAGE can be from whitenoise, or django built-in or cloud storage...
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-# STATICFILES_STORAGE = 'myproject.storage.S3Storage'
+    # Media files configuration for user uploaded files:
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+else:
+    print(cloudinary.config().cloud_name)
+    print(cloudinary.config().api_key)
+    print(cloudinary.config().api_secret)
+    # Production settings
+    # Set Cloudinary as the default file storage for media files
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-#Media files for user uploaded files:
-MEDIA_URL = 'https://portfolio-app-t0qn.onrender.com/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
-
+    # Configure Cloudinary using environment variables
+    CLOUDINARY_URL = env('CLOUDINARY_URL')
 
 
 # Default primary key field type
@@ -170,32 +193,6 @@ CSRF_COOKIE_SECURE = False #
 # SECURE_SSL_REDIRECT = False #
 # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 # SECURE_HSTS_PRELOAD = True
-
-
-# settings.py
-CLOUD_NAME = env('CLOUD_NAME')
-API_CLOUD_KEY = env('API_CLOUD_KEY')
-API_CLOUD_SECRET = env('API_CLOUD_SECRET')
-
-# print(f"CLOUD_NAME: {CLOUD_NAME}")
-# print(f"API_CLOUD_KEY: {API_CLOUD_KEY}")
-# print(f"API_CLOUD_SECRET: {API_CLOUD_SECRET}")
-
-
-# Cloudinary - Django Integration
-cloudinary.config(
-CLOUD_NAME = env("CLOUD_NAME"),
-API_CLOUD_KEY = env("API_CLOUD_KEY"),
-API_CLOUD_SECRET = env("API_CLOUD_SECRET")
-)
-
-
-# DEFAULT_FILE_STORAGE configuration for production DEBUG=False or
-# from .env file ENVIRONMENT=PRODUCTION
-if env('ENVIRONMENT') == 'PRODUCTION':
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
 
 
 # Email settings
