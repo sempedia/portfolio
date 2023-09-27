@@ -9,7 +9,7 @@ services:
 - type: web
   name: portfolio-app-t0qn
   runtime: python
-  buildcommand: './build.sh'
+  buildCommand: './build.sh'
   startCommand: 'gunicorn portfolio.wsgi:application'
   envVars:
   - key: DATABASE_URL
