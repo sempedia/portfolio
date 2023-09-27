@@ -1,0 +1,22 @@
+databases:
+- name: portfolio_db_8i8j
+  databaseName: portfolio_db_8i8j
+  user: portfolio_db_8i8j_user
+
+
+
+services:
+- type: web
+  name: portfolio-app-t0qn
+  runtime: python
+  buildcommand: './build.sh'
+  startCommand: 'gunicorn portfolio.wsgi:application'
+  envVars:
+  - key: DATABASE_URL
+    fromDatabase:
+      name: portfolio_db_8i8j
+      property: connectionString
+  - key: SECRET_KEY
+    generateValue: true
+  - key: WEB_CONCURRENCY
+    value: 4    

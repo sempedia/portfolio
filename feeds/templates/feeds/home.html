@@ -21,9 +21,13 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css" >
     <!-- links -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    {% comment %} <link rel="stylesheet" href="{% static 'css/main.css' %}"> {% endcomment %}
+    <link rel="stylesheet" href="https://res.cloudinary.com/db0qnho5w/raw/upload/v1/static/css/main.css">
+
     <link rel="preload" href="{% static 'fonts/Agustina.woff' %}" as="font" type="font/woff" crossorigin="">
-    <script src="https://use.fontawesome.com/66c3c19309.js"></script>
+    <link rel="stylesheet" href="https://res.cloudinary.com/db0qnho5w/raw/upload/v1/static/path/to/font-awesome.css">
+
+    {% comment %} <script src="https://use.fontawesome.com/66c3c19309.js"></script> {% endcomment %}
     <script type="module" src="https://unpkg.com/ionicons@5.5.3/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule="" src="https://unpkg.com/ionicons@5.5.3/dist/ionicons/ionicons.js"></script>
     <!-- links -->
@@ -84,7 +88,9 @@
                         </div>
                     </div>
                     <div class="col-md-6 initial-1 aos-init" data-aos="zoom-in" data-aos-delay="300">
-                            <img src="{% static 'images/alina.webp' %}" alt="Avatar" height="" width="">
+                            {% comment %} <img src="{% static 'images/alina.webp' %}" alt="Avatar" height="" width=""> {% endcomment %}
+                            <img src="https://res.cloudinary.com/db0qnho5w/image/upload/v1/static/images/alina.webp" alt="Avatar" height="" width="">
+
                        
                     </div>
                     {% endfor %}

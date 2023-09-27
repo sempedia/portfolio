@@ -3,7 +3,8 @@ from django.shortcuts import render
 from django.conf import settings
 from .models import PersonalInformation, About, Project, Skill
 from .forms import ProjectForm
-from django.contrib import messages
+from .cloudinary_config import uploader  # Import the uploader from your Cloudinary configuration module
+import messages
 
 def home(request):
     # Query relevant data
@@ -18,15 +19,19 @@ def home(request):
     # Initialize an empty form
     project_form = ProjectForm()
     
+    
     # Handle POST request for form submission
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Project added successfully.')  # Provide a success message
-        else:
-            messages.error(request, 'Error adding project. Please check your input.')  # Provide an error message if form is invalid
-    
+            # Upload the file to Cloudinary
+            file_to_upload = form.cleaned_data['your_file_field_name']
+            result = uploader.upload(file_to_upload)
+            cloudinary_url = result['secure_url']  # Get the Cloudinary URL of the uploaded file
+            # You can save the `cloudinary_url` or use it as needed
+            # ...
+
+        # ...
     context = {
         'personal_info': personal_info,
         'about': about,

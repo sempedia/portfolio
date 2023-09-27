@@ -37,7 +37,7 @@ DEBUG = False
 
 # DEVELOPMENT host:
 if DEBUG:
-    ALLOWED_HOSTS = ['127.0.0.1']
+    ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 # PRODUCTION host:
 else:
     ALLOWED_HOSTS = ['portfolio-app-t0qn.onrender.com', 'www.portfolio-app-t0qn.onrender.com']
@@ -99,11 +99,27 @@ WSGI_APPLICATION = 'portfolio.wsgi.application'
 
 # Deploying to render.com with postgres database:
 # make use of dj-database-url package to bring in our External Database URL from render.com
-DATABASES = {
-    'default': dj_database_url.parse(env('DATABASE_URL'))
+# DATABASES = {
+#     'default': dj_database_url.parse(env('DATABASE_URL'))
+# }
+
+
+# if not DEBUG means DEBUG = False
+if not DEBUG:
+    DATABASES = {
+    "default": dj_database_url.parse(env("DATABASE_URL"))
 }
-
-
+    
+else:
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
+   
+    
+    
 AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
